@@ -1,6 +1,7 @@
 
 import { LabHeader } from "@/components/LabHeader";
 import { PathLabTabs } from "@/components/PathLabTabs";
+import "./dashboard.css";
 
 const Dashboard = () => {
   return (

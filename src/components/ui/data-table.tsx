@@ -145,7 +145,7 @@ export function DataTable<T>({
                 if (filteredItems.length === 0) return null;
                 
                 return (
-                  <TableBody key={groupValue} className="divide-y">
+                  <React.Fragment key={groupValue}>
                     {groupKey && groupValue && (
                       <TableRow 
                         className="bg-muted/30 hover:bg-muted/40 cursor-pointer" 
@@ -172,7 +172,7 @@ export function DataTable<T>({
                     {(expandedGroups.has(groupValue) || !groupKey || !groupValue) &&
                       filteredItems.map((item, itemIndex) => (
                         <TableRow 
-                          key={itemIndex} 
+                          key={`item-${itemIndex}`} 
                           className="animate-fade-in"
                         >
                           {groupKey && groupValue && <TableCell />}
@@ -186,7 +186,7 @@ export function DataTable<T>({
                           ))}
                         </TableRow>
                       ))}
-                  </TableBody>
+                  </React.Fragment>
                 );
               })}
             </TableBody>
