@@ -12,22 +12,22 @@
 
 .bg-status-completed,
 .bg-status-paid {
-  background-color: rgba(16, 185, 129, 0.2);
-  color: rgb(16, 185, 129);
+  background-color: rgb(16, 185, 129);
+  color: white;
   font-weight: 600;
 }
 
 .bg-status-booked,
 .bg-status-unpaid {
-  background-color: rgba(236, 72, 153, 0.2);
-  color: rgb(236, 72, 153);
+  background-color: rgb(236, 72, 153);
+  color: white;
   font-weight: 600;
 }
 
 .bg-status-inprogress,
 .bg-status-partial {
-  background-color: rgba(245, 158, 11, 0.2);
-  color: rgb(245, 158, 11);
+  background-color: rgb(245, 158, 11);
+  color: white;
   font-weight: 600;
 }
 
