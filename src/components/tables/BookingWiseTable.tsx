@@ -1,4 +1,3 @@
-
 import { DataTable } from "@/components/ui/data-table";
 import { format } from "date-fns";
 import { 
@@ -23,7 +22,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
-// Define the booking type
 interface Booking {
   id: string;
   date: Date;
@@ -43,7 +41,6 @@ interface Payment {
   date: Date;
 }
 
-// Sample data
 const bookings: Booking[] = [
   {
     id: "BK001",
@@ -112,40 +109,36 @@ const bookings: Booking[] = [
 ];
 
 export function BookingWiseTable() {
-  // Function to render the payment status
   const renderPaymentStatus = (booking: Booking) => {
     const totalPaid = booking.payments.reduce((sum, payment) => sum + payment.amount, 0);
     const paymentStatus = totalPaid === 0 ? 'unpaid' : totalPaid < booking.payableAmount ? 'partial' : 'paid';
     
     return (
       <div className={`status-chip bg-status-${paymentStatus}`}>
-        {paymentStatus === 'unpaid' && <AlertCircle className="h-3 w-3" />}
-        {paymentStatus === 'partial' && <Clock className="h-3 w-3" />}
-        {paymentStatus === 'paid' && <Check className="h-3 w-3" />}
+        {paymentStatus === 'unpaid' && <AlertCircle className="h-3.5 w-3.5" />}
+        {paymentStatus === 'partial' && <Clock className="h-3.5 w-3.5" />}
+        {paymentStatus === 'paid' && <Check className="h-3.5 w-3.5" />}
         <span className="capitalize">{paymentStatus}</span>
       </div>
     );
   };
   
-  // Function to render the booking status
   const renderBookingStatus = (status: Booking['status']) => {
     return (
       <div className={`status-chip bg-status-${status === 'in-progress' ? 'inprogress' : status}`}>
-        {status === 'booked' && <Clock className="h-3 w-3" />}
-        {status === 'in-progress' && <AlertCircle className="h-3 w-3" />}
-        {status === 'completed' && <Check className="h-3 w-3" />}
+        {status === 'booked' && <Clock className="h-3.5 w-3.5" />}
+        {status === 'in-progress' && <AlertCircle className="h-3.5 w-3.5" />}
+        {status === 'completed' && <Check className="h-3.5 w-3.5" />}
         <span className="capitalize">{status === 'in-progress' ? 'In Progress' : status}</span>
       </div>
     );
   };
   
-  // Function to render the payment methods and details
   const renderPaymentDetails = (booking: Booking) => {
     const { payments, payableAmount } = booking;
     const totalPaid = payments.reduce((sum, payment) => sum + payment.amount, 0);
     const remaining = payableAmount - totalPaid;
     
-    // Group payments by method
     const paymentsByMethod = payments.reduce((acc, payment) => {
       acc[payment.method] = (acc[payment.method] || 0) + payment.amount;
       return acc;
