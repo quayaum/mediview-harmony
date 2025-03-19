@@ -1,3 +1,4 @@
+
 import { DataTable } from "@/components/ui/data-table";
 import { 
   MoreHorizontal, 
@@ -22,6 +23,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Link } from "react-router-dom";
 
 // Define the patient type
 interface Patient {
@@ -313,25 +315,33 @@ export function PatientWiseTable() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-[180px]">
-              <DropdownMenuItem>
-                <User className="mr-2 h-4 w-4" />
-                View Profile
+              <DropdownMenuItem asChild>
+                <Link to={`/patients/${patient.id}`}>
+                  <User className="mr-2 h-4 w-4" />
+                  View Profile
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <FileEdit className="mr-2 h-4 w-4" />
-                Edit Patient
+              <DropdownMenuItem asChild>
+                <Link to={`/patients/${patient.id}/edit`}>
+                  <FileEdit className="mr-2 h-4 w-4" />
+                  Edit Patient
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <History className="mr-2 h-4 w-4" />
-                Test History
+              <DropdownMenuItem asChild>
+                <Link to={`/patients/${patient.id}/test-history`}>
+                  <History className="mr-2 h-4 w-4" />
+                  Test History
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <FileText className="mr-2 h-4 w-4" />
                 New Booking
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Printer className="mr-2 h-4 w-4" />
-                Print Reports
+              <DropdownMenuItem asChild>
+                <Link to={`/patients/${patient.id}/print-reports`}>
+                  <Printer className="mr-2 h-4 w-4" />
+                  Print Reports
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="text-destructive">

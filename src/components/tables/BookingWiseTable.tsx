@@ -1,4 +1,3 @@
-
 import { DataTable } from "@/components/ui/data-table";
 import { format } from "date-fns";
 import { 
@@ -23,6 +22,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Link } from "react-router-dom";
 
 interface Booking {
   id: string;
@@ -260,17 +260,23 @@ export function BookingWiseTable() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-[180px]">
-              <DropdownMenuItem>
-                <FileEdit className="mr-2 h-4 w-4" />
-                Edit Booking
+              <DropdownMenuItem asChild>
+                <Link to={`/bookings/${booking.id}/edit`}>
+                  <FileEdit className="mr-2 h-4 w-4" />
+                  Edit Booking
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard className="mr-2 h-4 w-4" />
-                Add Payment
+              <DropdownMenuItem asChild>
+                <Link to={`/bookings/${booking.id}/add-payment`}>
+                  <CreditCard className="mr-2 h-4 w-4" />
+                  Add Payment
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <FileText className="mr-2 h-4 w-4" />
-                View Details
+              <DropdownMenuItem asChild>
+                <Link to={`/bookings/${booking.id}`}>
+                  <FileText className="mr-2 h-4 w-4" />
+                  View Details
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Printer className="mr-2 h-4 w-4" />
@@ -310,3 +316,4 @@ export function BookingWiseTable() {
     />
   );
 }
+

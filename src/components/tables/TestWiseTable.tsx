@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Progress } from "@/components/ui/progress";
+import { Link } from "react-router-dom";
 
 // Define the test type
 interface Test {
@@ -263,17 +264,23 @@ export function TestWiseTable() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-[180px]">
-              <DropdownMenuItem>
-                <FileText className="mr-2 h-4 w-4" />
-                Test Details
+              <DropdownMenuItem asChild>
+                <Link to={`/tests/${test.id}`}>
+                  <FileText className="mr-2 h-4 w-4" />
+                  Test Details
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <FileEdit className="mr-2 h-4 w-4" />
-                Edit Test
+              <DropdownMenuItem asChild>
+                <Link to={`/tests/${test.id}/edit`}>
+                  <FileEdit className="mr-2 h-4 w-4" />
+                  Edit Test
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <BarChart2 className="mr-2 h-4 w-4" />
-                View Analytics
+              <DropdownMenuItem asChild>
+                <Link to={`/tests/${test.id}/analytics`}>
+                  <BarChart2 className="mr-2 h-4 w-4" />
+                  View Analytics
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="text-destructive">
