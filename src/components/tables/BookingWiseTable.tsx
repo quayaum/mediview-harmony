@@ -1,3 +1,4 @@
+
 import { DataTable } from "@/components/ui/data-table";
 import { format } from "date-fns";
 import { 
@@ -9,7 +10,8 @@ import {
   Printer,
   FileText,
   Trash2,
-  CreditCard
+  CreditCard,
+  Calendar
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -293,8 +295,13 @@ export function BookingWiseTable() {
       data={bookings}
       groupKey="date"
       groupHeaderRenderer={(date) => (
-        <div className="font-medium">
+        <div className="font-medium flex items-center gap-2">
+          <Calendar className="h-4 w-4 text-primary" />
+          <span>Booking Date:</span>
           {format(new Date(date), "MMMM d, yyyy")}
+          <span className="text-xs text-muted-foreground ml-1">
+            (Bookings made on this date)
+          </span>
         </div>
       )}
       searchPlaceholder="Search bookings..."
