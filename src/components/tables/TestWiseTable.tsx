@@ -1,4 +1,3 @@
-
 import { DataTable } from "@/components/ui/data-table";
 import { 
   MoreHorizontal, 
@@ -9,7 +8,8 @@ import {
   Trash2,
   Check,
   Clock,
-  AlertCircle
+  AlertCircle,
+  Calendar
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -27,7 +27,7 @@ interface Test {
   id: string;
   name: string;
   category: string;
-  date: Date;
+  date: Date; // This represents the date when the test was added to the system
   price: number;
   bookingCount: number;
   completedCount: number;
@@ -36,19 +36,32 @@ interface Test {
   totalRevenue: number;
 }
 
-// Sample data
+// Sample data - same test on different dates to demonstrate grouping
 const tests: Test[] = [
   {
     id: "T001",
     name: "Complete Blood Count (CBC)",
     category: "Hematology",
-    date: new Date(2023, 7, 10),
+    date: new Date(2023, 7, 10), // Aug 10, 2023
     price: 500,
     bookingCount: 45,
     completedCount: 38,
     pendingCount: 2,
     inProgressCount: 5,
     totalRevenue: 22500
+  },
+  // Same test on a different date
+  {
+    id: "T001-B",
+    name: "Complete Blood Count (CBC)",
+    category: "Hematology",
+    date: new Date(2023, 7, 11), // Aug 11, 2023
+    price: 500,
+    bookingCount: 15,
+    completedCount: 12,
+    pendingCount: 1,
+    inProgressCount: 2,
+    totalRevenue: 7500
   },
   {
     id: "T002",
@@ -281,12 +294,17 @@ export function TestWiseTable() {
       data={tests}
       groupKey="date"
       groupHeaderRenderer={(date) => (
-        <div className="font-medium">
+        <div className="font-medium flex items-center gap-2">
+          <Calendar className="h-4 w-4 text-primary" />
+          <span>Added on:</span>
           {new Date(date).toLocaleDateString('en-US', { 
             year: 'numeric', 
             month: 'long', 
             day: 'numeric' 
           })}
+          <span className="text-xs text-muted-foreground ml-1">
+            (Tests added to system on this date)
+          </span>
         </div>
       )}
       searchPlaceholder="Search tests..."

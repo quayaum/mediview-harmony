@@ -1,4 +1,3 @@
-
 import { DataTable } from "@/components/ui/data-table";
 import { 
   MoreHorizontal, 
@@ -10,7 +9,8 @@ import {
   History,
   Printer,
   FileEdit,
-  Trash2
+  Trash2,
+  Calendar
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -32,6 +32,7 @@ interface Patient {
   contactNumber: string;
   email: string;
   address: string;
+  lastVisitDate: Date; // Added for grouping patients by last visit date
   testHistory: TestRecord[];
 }
 
@@ -43,7 +44,7 @@ interface TestRecord {
   status: 'completed' | 'in-progress' | 'booked';
 }
 
-// Sample data
+// Sample data with last visit dates added for grouping
 const patients: Patient[] = [
   {
     id: "PT001",
@@ -53,6 +54,7 @@ const patients: Patient[] = [
     contactNumber: "+91 98765 43210",
     email: "john.smith@example.com",
     address: "123 Main St, Bangalore",
+    lastVisitDate: new Date(2023, 7, 10), // August 10, 2023
     testHistory: [
       {
         id: "TH001",
@@ -78,6 +80,7 @@ const patients: Patient[] = [
     contactNumber: "+91 87654 32109",
     email: "jane.doe@example.com",
     address: "456 Park Ave, Mumbai",
+    lastVisitDate: new Date(2023, 7, 10), // August 10, 2023
     testHistory: [
       {
         id: "TH003",
@@ -96,6 +99,7 @@ const patients: Patient[] = [
     contactNumber: "+91 76543 21098",
     email: "robert.johnson@example.com",
     address: "789 Elm St, Delhi",
+    lastVisitDate: new Date(2023, 7, 11), // August 11, 2023
     testHistory: [
       {
         id: "TH004",
@@ -114,6 +118,7 @@ const patients: Patient[] = [
     contactNumber: "+91 65432 10987",
     email: "sarah.williams@example.com",
     address: "101 Oak Rd, Chennai",
+    lastVisitDate: new Date(2023, 7, 11), // August 11, 2023
     testHistory: [
       {
         id: "TH005",
@@ -139,6 +144,7 @@ const patients: Patient[] = [
     contactNumber: "+91 54321 09876",
     email: "michael.brown@example.com",
     address: "202 Pine Ln, Hyderabad",
+    lastVisitDate: new Date(2023, 7, 12), // August 12, 2023
     testHistory: [
       {
         id: "TH007",
@@ -344,6 +350,21 @@ export function PatientWiseTable() {
     <DataTable
       columns={columns}
       data={patients}
+      groupKey="lastVisitDate"
+      groupHeaderRenderer={(date) => (
+        <div className="font-medium flex items-center gap-2">
+          <Calendar className="h-4 w-4 text-primary" />
+          <span>Last Visit:</span>
+          {new Date(date).toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+          })}
+          <span className="text-xs text-muted-foreground ml-1">
+            (Patients who last visited on this date)
+          </span>
+        </div>
+      )}
       searchPlaceholder="Search patients..."
       emptyStateMessage="No patients available"
       noFilteredDataMessage="No patients match your search"
